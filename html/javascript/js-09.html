@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>js-09.BOM、DOM元素查找</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Consolas, Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+p {
+	text-indent : 2em; 
+}
+li,ol {
+	margin-left : 2em;
+}
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 14px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h2>BOM：Browser Object Model</h2>
+<p>浏览器对象模型，使 JavaScript 有能力与浏览器“对话”</p>
+<hr />
+<h3>Window 对象：</h3>
+<p>代表浏览器中打开的窗口，使用 window 来引用 Window 对象。当调用 window 对象的属性与方法时，可以省略 (window.) 的书写</p>
+<hr />
+<h3>Location 对象</h3>
+<p>它是<strong>window</strong>对象的一部分:表示URL（网址）</p>
+<p>使用 <strong>window.location</strong> 或 <strong>location</strong> 来获取</p>
+<h4>URL格式：</h4>
+<p><strong>协议://域名:端口/资源路径?查询字符串#hash</strong></p>
+<p><strong>HTTP:</strong> 默认端口 80</p>
+<p><strong>HTTPS:</strong> 默认端口 443</p>
+<h4>查询字符串格式：</h4>
+<p><strong>key1=value1&amp;key2=value2&amp;key3=value3</strong></p>
+<h4>属性：</h4>
+<p><strong>hash</strong> 设置或返回从井号 (#) 开始的 URL（锚）。 #hash</p>
+<p><strong>host</strong> 设置或返回主机名和当前 URL 的端口号。 域名:端口</p>
+<p><strong>hostname</strong> 设置或返回当前 URL 的主机名。 域名</p>
+<p><strong>href</strong> 设置或返回完整的 URL。 协议://域名:端口/资源路径?查询字符串#hash</p>
+<p><strong>pathname</strong> 设置或返回当前 URL 的路径部分。 /资源路径</p>
+<p><strong>port</strong> 设置或返回当前 URL 的端口号。 端口</p>
+<p><strong>protocol</strong> 设置或返回当前 URL 的协议。 协议</p>
+<p><strong>search</strong> 设置或返回从问号 (?) 开始的 URL（查询部分）。 ?查询字符串</p>
+<h4>API：</h4>
+<p><strong>reload()</strong> 重新加载，刷新</p>
+<p><strong>assign()</strong> 加载新的文档。会添加历史访问记录</p>
+<p><strong>replace()</strong> 用新的文档替换当前文档。不会添加历史记录</p>
+<hr />
+<h3>History 对象：表示访问历史</h3>
+<p>使用 window.history 或 history 来获取。</p>
+<h4>API:</h4>
+<p><strong>back()</strong> 后退</p>
+<p><strong>forward()</strong> 前进</p>
+<p><strong>go(number)</strong> +number前进   -number后退 </p>
+<hr />
+<h3>Navigator 对象：	包含有关浏览器的信息。navigator</h3>
+<hr />
+<h3>Document 对象：代表浏览器中打开的文档</h3>
+<p>使用 <strong>window.document</strong> 或 <strong>document</strong> 来获取</p>
+<p><strong>window.innerWidth</strong> 获取视口宽度（可视的文档窗口尺寸，包括滚动条）</p>
+<p><strong>window.innerHeight</strong> 获取视口高度</p>
+<h4>API：</h4>
+<p><strong>alert()</strong></p>
+<p><strong>prompt()</strong></p>
+<p><strong>confirm()</strong> -- 确认框</p>
+<p><strong>open()</strong> --弹出窗口打开新页面</p>
+<p><strong>close()</strong></p>
+<h4>计时器：</h4>
+<p><strong>var id = setTimeout(fn, duration)</strong></p>
+<p>　　　一次计时，到达计时时间后执行一次计时函数</p>
+<p>　　　fn -- 计时时间到达时执行的函数</p>
+<p>　　　duration -- 计时时间</p>
+<p><strong>var id = setInterval(fn, duration)</strong></p>
+<p>周期计时，每隔计时时间都会执行计时函数</p>
+<h4>清除计时器：</h4>
+<p><strong>clearTimeout(id)</strong></p>
+<p><strong>clearInterval(id)</strong></p>
+<p><strong>注意：</strong>setTimeout()、setInterval()都是异步执行计时任务，JS是单线程的程序。</p>
+<p><strong>什么是同步执行？什么是异步执行？什么是多线程？什么是单线程？</strong></p>
+<p>可以去看看：<a href="https://www.cnblogs.com/guoyeqiang/p/8317582.html">https://www.cnblogs.com/guoyeqiang/p/8317582.html</a></p>
+<hr />
+<h3>练习</h3>
+<ol>
+<li>使用 setInterval() 实现倒计时效果</li>
+<li>使用 setTimeout() 实现倒计时效果 </li>
+<li>实现5秒后自动跳转到百度首页的效果</li>
+</ol>
+<hr />
+<h3>Event Loop 事件轮询机制</h3>
+<hr />
+<h3>DOM：Document Object Model 文档对象模型</h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/DOM">https://developer.mozilla.org/zh-CN/docs/Glossary/DOM</a></p>
+<p>在 JavaScript 中可以操纵文档内容：添加、修改、删除、克隆、查询节点......</p>
+<p><strong>document 指代整个文档。</strong></p>
+<h4>查找元素节点：</h4>
+<pre><code>document.getElementById() 
+    -- 通过元素的 id 属性来查找元素，返回查找到的DOM对象，如果不存在对应id的元素，则返回null
+
+document.getElementsByTagName() 
+    -- 通过元素名查找元素，返回 HTMLCollection 对象，该对象是类(似于)数组对象，对象中保存了查找到的DOM对象
+
+document.getElementsByClassName() 
+    -- 通过类名查找元素(ES5新增)，返回 HTMLCollection 对象
+
+document.getElementsByName() 
+    -- 根据元素 name 属性来查找元素(了解)
+
+element.getElementsByTagName() 
+    -- 在element元素后代中通过元素名查找元素，返回 HTMLCollection 对象，该对象是类(似于)数组对象，对象中保存了查找到的DOM对象
+
+element.getElementsByClassName() 
+    -- 在element元素后代中通过类名查找元素(ES5新增)，返回 HTMLCollection 对象
+</code></pre>
+
+<h4>扩展：</h4>
+<pre><code>document.querySelector(selector)
+    -- 返回文档中匹配指定的选择器组的第一个元素
+
+document.querySelectorAll(selector)
+    -- 返回与指定的选择器组匹配的文档中的元素列表 
+</code></pre>
+
+<p><strong>document.getElementsByClassName() 是ES5新增的，那么如何解决根据类名查找元素的浏览器兼容问题？</strong></p>
+<h4>尝试自己动手去写个封装函数吧！</h4>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

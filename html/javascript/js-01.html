@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>js-01.基本概念</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Consolas, Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+p {
+	text-indent : 2em; 
+}
+li,ol {
+	margin-left : 2em;
+}
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 14px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>JavaScript　by 吴明富　小明</h1>
+<hr />
+<h3>学习手册：</h3>
+<ul>
+<li>W3School离线手册</li>
+<li>http://www.w3school.com.cn/</li>
+<li>http://www.runoob.com/</li>
+<li>https://developer.mozilla.org/zh-CN/</li>
+</ul>
+<h3>书籍：</h3>
+<ul>
+<li>《JavaScript高级程序设计》</li>
+<li>《JavaScript权威指南》</li>
+</ul>
+<h3>1．JavaScript基本介绍及发展趋势</h3>
+<ul>
+<li>Livescript --&gt; Javascript --&gt; ECMAScript</li>
+<li>ES3  ECMAScript 3.0</li>
+<li>ES5  ECMAScript 5.1</li>
+<li>备注：ES6有时也指代下一代ECAMScript标准</li>
+<li>ES6  ECMAScript 2015</li>
+<li>ES7  ECMAScript 2016</li>
+<li>ES8  ECMAScript 2017</li>
+</ul>
+<h3>2．JS和H5的关系（略）</h3>
+<h3>3．编写JS及如何运行JS</h3>
+<ul>
+<li>类比于 CSS的编写及运行</li>
+<li>内联js</li>
+<li>内部js:</li>
+</ul>
+<h4></h4>
+<pre><code>    &lt;script type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>　　　注意：<strong>type</strong> 属性可以省略，默认 <strong>type</strong> 取值为 <strong>&quot;text/javascript&quot;</strong>, <strong>script</strong> 元素可以写在文档中任意位置，建议写在 <strong>body</strong> 标签前。</p>
+<ul>
+<li>引入外部js文件：</li>
+</ul>
+<h3></h3>
+<pre><code>    &lt;script src=&quot;外部JS资源路径&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>　　　注意：<strong>script</strong> 必须独立书写,开始与结束标签间不添加其它JS代码。</p>
+<ul>
+<li>运行：</li>
+</ul>
+<p>　　　JS引擎 -- chrome -- V8</p>
+<ul>
+<li>输出:</li>
+</ul>
+<h4></h4>
+<pre><code>    console.log() -- 控制台打印输出
+    console.dir() -- 详细打印
+    console.table() -- 表格形式打印
+    confirm() -- 显示一个确认对话框
+    alert() -- 显示一个警告对话框
+</code></pre>
+
+<ul>
+<li>输入：</li>
+</ul>
+<h4></h4>
+<p>　　　document.write() --将一个文本字符串写入文档流</p>
+<p>　　　注意：向文档流输入，可能会打乱页面原有布局</p>
+<p>　　　prompt() -显示一个对话框,用来提示用户输入文字</p>
+<p>　　　注意：点击&quot;取消&quot;或者关闭返回 NULL</p>
+<p>　　　document.getElementById(&quot;xxx&quot;)  文本框输入【DOM操作】</p>
+<p>　　　innerText / innerHTML</p>
+<ul>
+<li>注释：</li>
+</ul>
+<h4></h4>
+<p>　　　单行： //</p>
+<p>　　　多行： /* */</p>
+<ul>
+<li>js文件内常用注释格式：</li>
+</ul>
+<h4></h4>
+<pre><code>    /**
+     * @param {type} parameter
+     * @return {type}
+     */
+</code></pre>
+
+<h3>4． 变量(variate)的概念及基本运算</h3>
+<p>变量：</p>
+<p>　　　内存中数据存储的空间，该空间中的数据可以随着运算而发生改变</p>
+<p>变量三要素：</p>
+<p>　　　变量名 -- 别名</p>
+<p>　　　变量值 -- 数据</p>
+<p>　　　变量类型 -- 区分不同类型的数据，空间大小</p>
+<p>变量定义：</p>
+<p>　　　语法：var 变量名 = 变量值;</p>
+<p>变量申明：</p>
+<p>　　　var 变量名;</p>
+<p>变量赋值：</p>
+<p>　　　变量名 = 变量值;</p>
+<p>变量类型：</p>
+<p>　　　JS 是弱类型（动态类型）的语言，变量的类型是运行时动态确定的。</p>
+<p>　　　在变量定义时不需要显式指明变量的数据类型。</p>
+<p>分类：</p>
+<p>　　　基本数据类型（原始数据类型）：</p>
+<pre><code>        String
+        Boolean -- false / true
+        Number
+        Undefined
+        Null
+        Symbol
+</code></pre>
+
+<p>　　　引用数据类型：Object</p>
+<p>求解表达式的数据类型:	</p>
+<p>　　　typeof  表达式</p>
+<p>　　　注意：typeof 相当于是个运算符</p>
+<p>typeof 所求解的结果的数据类型为字符串，它有一下几种取值：</p>
+<pre><code>        String --- &quot;string&quot;
+        Boolean --- &quot;boolean&quot;
+        Number --- &quot;number&quot;
+        Undefined -- &quot;undefined&quot;
+        Null -- &quot;object&quot;
+        Symbol -- &quot;symbol&quot;
+        Object --&quot;object&quot;
+        Function(){} -- &quot;function&quot;  注意：函数也可以求解数据类型
+</code></pre>
+
+<h3>5． 变量命名规则和关键字的介绍</h3>
+<p>关键字：</p>
+<p>　　　语法中已有定义的有特殊意义的单词</p>
+<p>变量命名规则：</p>
+<p>　　　a. 可取 字母、数字、下划线_、$ 这些字符</p>
+<p>　　　b. 不能以数字开头</p>
+<p>　　　c. 不能是关键字</p>
+<p>变量命名规范：</p>
+<p>　　　a. 取简洁的英文单词命名</p>
+<p>　　　b. 第一个单词首字符小写，其它单词首字符大写，除首字符以外其它字符全部小写</p>
+<h3>6． 变量不同类型之间的自动、手动类型转换</h3>
+<p>数据类型转换：</p>
+<p>　　　自动(隐式)类型转换</p>
+<p>　　　手动(显式、强制)类型转换:</p>
+<p>　　　　　parseInt()</p>
+<p>　　　　　parseFloat()</p>
+<p>　　　　　-- 通常用于将字符串解析为数字</p>
+<p>　　　　　-- 有一定的容错能力，如果第一个字符为非兼容格式的数字字符，则返回 NaN</p>
+<p>　　　　　-- NaN 是 Number 类型的一个特殊取值(not a number)</p>
+<p>　　　　　isNaN(xx)</p>
+<p>　　　　　-- 判断参数是否为非数字结果</p>
+<p>　　　　　-- 返回 true 表示 非数字（不是数字）</p>
+<p>　　　　　-- 返回 false 表示 数字</p>
+<p>　　　　　Number()</p>
+<p>　　　　　-- 将其它类型转换为数字</p>
+<p>　　　　　a. String</p>
+<p>　　　　　　　完全兼容的数字格式 --&gt; 对应的数字</p>
+<p>　　　　　　　不兼容的格式 --&gt; NaN</p>
+<p>　　　　　　　&quot; &quot;(空字符串) --&gt; 0</p>
+<p>　　　　　b. Boolean</p>
+<p>　　　　　　　true --&gt; 1</p>
+<p>　　　　　　　false --&gt; 0</p>
+<p>　　　　　c. Undefined</p>
+<p>　　　　　　　undefined --&gt; NaN</p>
+<p>　　　　　d. Null</p>
+<p>　　　　　　　null --&gt; 0</p>
+<p>　　　　　e. Object</p>
+<p>　　　　　　　{} --&gt; NaN</p>
+<p>　　　　　f. Symbol</p>
+<p>　　　　　　　symbol --&gt; NaN</p>
+<p>　　　　　g. Function</p>
+<p>　　　　　　　function(){} --&gt; NaN</p>
+<h3>7． 赋值、关系、算术等运算符的讲解</h3>
+<p>赋值运算符：=</p>
+<p>　　　将右边表达式的值赋给左边的变量保存</p>
+<p>算术运算符(二目运算符) ：</p>
+<p>　　　<em>+ - * / %(模)</em></p>
+<p>　　　注意：字符串的+表示字符串拼接</p>
+<p>自增、自减　++  --：</p>
+<p>　　　前缀(++i)：先运算后引用</p>
+<p>　　　后缀(i++)：先引用后运算</p>
+<p>　　　示例：</p>
+<pre><code>        var i = 5;
+        var j = i++ + ++i + ++i + i++ + i + i++;
+        i = ?   j = ?
+</code></pre>
+
+<p>关系(比较)：</p>
+<p>　　　<em>&gt;  &lt;  &gt;=  &lt;=  ==   ===  !=  !==</em></p>
+<p>　　　==：	</p>
+<p>　　　　　在数据类型一致的情况下，比较值是否相同；</p>
+<p>　　　　　数据类型不一致的情况下，先尝试转换为同种数据类型，再比较值是否相同</p>
+<p>　　　===：</p>
+<p>　　　　　在数据类型一致的情况下，比较值是否相同；</p>
+<p>　　　　　数据类型不一致的情况下，直接返回 false</p>
+<p>逻辑运算符：</p>
+<p>　　　&amp;&amp;(并且)	  ||(或者)    !(非，单目运算符)</p>
+<p>短路运算符：</p>
+<p>　　　&amp;&amp;：第一个表达式为 false 则不再进行第二个表达式运算</p>
+<p>　　　||：第一个表达式为 true 则不再进行第二个表达式运算</p>
+<p>　　　示例：求某年是否是闰年
+&lt;闰年：能被4整除但不能被100整除 或 能被400整除&gt;</p>
+<p>三目运算符：</p>
+<p>　　　条件 ? true : false</p>
+<p>　　　示例：求某年2月有多少天</p>
+<p>复合运算符：</p>
+<p>　　　+= 	-=	*=	/= 	%=</p>
+<p>其它单目运算符(了解)：</p>
+<p>　　　<em>+	-	~	&amp;	|	&gt;&gt;	()	.</em></p>
+<p>　　　注意：这里的+  - 不同于上面的双目运算符</p>
+<p>　　　示例：+New Date()     -(function(){})()</p>
+<h3>8．二进制</h3>
+<p>计算机识别：</p>
+<p>　　　二进制	0~1
+　　　00000000
+　　　11111111</p>
+<p>存储容量：</p>
+<p>　　　1 Byte &lt;==&gt; 8 bit</p>
+<p>　　　1 KB == 1024 B</p>
+<p>　　　MB	GB	TB	PB</p>
+<p>　　　100 Mbps	即兆比特每秒</p>
+<p>　　　十进制	0~9</p>
+<h3>9．练习</h3>
+<h4>1、为抵抗洪水，战士连续作战89小时，编程计算共多少天零多少小时？</h4>
+<h4>2、小明要到美国旅游，可是那里的温度是以华氏度为单位记录的。他需要一个程序将华氏温度（80度）转换为摄氏度，并以华氏度和摄氏度为单位分别显示该温度。</h4>
+<p>提示：摄氏度与华氏度的转换公式为：摄氏度 = 5/9.0*(华氏度-32)，保留3位小数？</p>
+<h4>3、计算两个文本框的和</h4>
+<h4>4、var k=0;  console.log(k++ + ++k +k + k++)</h4>
+<h4>5、掌握逻辑运算的意义</h4>
+<h4>6、掌握八进制、十六进制的写法</h4>
+<h4>7、掌握NaN的含义</h4>
+<h4>8、掌握Number函数的转换结果</h4>
+<h4>9、计算两个文本框的加减乘除</h4>
+<p>要求：</p>
+<ul>
+<li>使用parseInt方法类型转换</li>
+<li>计算结果使用Math.round方法四舍五入</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

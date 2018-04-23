@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.carousel .imgs {
+  list-style: none;
+}
+.carousel .pages {
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  box-sizing: border-box;
+}
+.carousel .pages i {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #523669; 
+  border-radius: 50%;
+  float: left;
+  margin: 25px 10px 0 10px;
+}
+.carousel .pages .current {
+  background-color: orange;
+}
+.carousel .common{
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 3px;
+  line-height: 70px;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+.carousel .toLeft {
+  left: 10px;
+  background: url("../images/slider-left.png") no-repeat center center;
+}
+.carousel .toRight {
+  right: 10px;
+  background: url("../images/slider-right.png") no-repeat center center;
+}

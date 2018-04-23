@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>js-05.作用域、声明提升</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Consolas, Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+p {
+	text-indent : 2em; 
+}
+li,ol {
+	margin-left : 2em;
+}
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 14px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h3>练习：</h3>
+<ol>
+<li>定义函数，计算两个数之和</li>
+<li>定义函数，计算某个数的阶乘</li>
+<li>定义函数，生成随机整数，可指定随机值的下限、上限</li>
+<li>定义函数，生成一个随机的颜色值 &quot;rgb(?, ?, ?)&quot;</li>
+</ol>
+<hr />
+<h3>函数：</h3>
+<h4>a.参数：</h4>
+<p>　　　(1).形参个数与实参个数可以不相同。</p>
+<p>　　　(2).当实参个数少于形参个数时，未传递参数在函数主体中的取值为 undefined；</p>
+<p>　　　(3).当实参个数多于形参个数时，多余传递的参数在函数主体中暂时忽略。</p>
+<h4>b.arguments（对象）：</h4>
+<p>　　　用于函数体内，作用：表示获取到的实际参数列表信息。</p>
+<h4>c.如果需要获取实参列表中某个具体参数值时：</h4>
+<p>　　　(1).可以使用arguments[index]方式来获取具体参数值，index 相当于是参数的编号，该编号从0开始。</p>
+<p>　　　(2).可以使用 arguments.length 来获取实参个数。</p>
+<p>　　　(3).可以使用 函数名.length 来获取形参个数（了解）</p>
+<h4>d.返回值：return 表达式;</h4>
+<p>　　　作用：</p>
+<p>　　　　　(1).将表达式的值返回到函数调用处</p>
+<p>　　　　　(2).结束函数的执行</p>
+<p>　　　return;</p>
+<p>　　　　　(1).常用于结束函数执行；函数返回值为 undefined。</p>
+<p>　　　　　(2).如果函数未显式使用 return 返回，则函数的返回值为 undefined。</p>
+<h4>f.跳转语句：</h4>
+<p>　　　break;</p>
+<p>　　　　　可用于 switch 与循环结构，表示退出整个语法结构</p>
+<p>　　　continue;</p>
+<p>　　　　　只能用于循环结构，表示结束当前次循环</p>
+<p>　　　return 表达式;</p>
+<p>　　　　　用于函数中，表示结束函数执行，同时将表达式结果返回到函数调用处</p>
+<hr />
+<h3>作用域：</h3>
+<h4>a.全局作用域：</h4>
+<p>定义在函数体外部的变量，可以整个脚本程序全局范围内使用的变量。</p>
+<h4>b.局部作用域(函数级作用域)：</h4>
+<p>函数体内部所定义的变量，其作用范围只在函数体的 {} 范围内有用，超出函数 {} 后，则不能再使用。 </p>
+<p>局部作用域中的变量可以和全局变量同名，在函数体中优先使用局部变量。</p>
+<h4>c.块级作用域：</h4>
+<p>IIFE：
+Immediately Invoked Function Expression
+立即调用函数表达式（匿名自执行函数、自执行匿名函数）</p>
+<p>使用IIFE实现块级作用域.</p>
+<p>ES6:
+let 变量名 = 变量值;
+const 变量名 = 变量值; // 定义的是常量</p>
+<h4>d.作用域链：</h4>
+<p>关于变量查找的问题：要使用某个变量，首先在自己当前作用域下查找是否存在，如果存在则直接使用；</p>
+<p>如果不存在，则会向上层作用域中查找；</p>
+<p>如果上层作用域中存在，则直接使用，如果不存在，则继续向上层的上层作用域查找（作用链）。</p>
+<p>如果作用域链中不存在使用的变量，则提示错误。</p>
+<h4>e.声明提升(预解析)：</h4>
+<p>将 var 定义变量的声明部分向其作用域的最顶部提升，注意提升的是声明，赋值仍然保留在原来位置上。</p>
+<p>对于函数也存在声明提升，会将函数声明方式定义出来的函数整体(包括函数声明与函数主体)向作用域的最顶部提升。</p>
+<p>对于函数表达式方式定义出来的函数，仅提升变量声明部分，不提升赋值部分。</p>
+<hr />
+<h3>定义函数实现：</h3>
+<h4>a.求菲波拉契(兔子数列)数列的某项</h4>
+<pre><code>    1, 1, 2, 3, 5, 8, 13, 21, ........
+    fn(n)
+
+    fn(n) == fn(n - 1) + fn(n - 2)
+    fn(n - 1) == fn(n - 2) + fn(n - 3)
+    fn(n - 2) == fn(n - 3) + fn(n - 4)
+
+    function add(n){
+    // if(n === 1 || n === 2)
+    //   return 1;
+    // return add(n-1) + add(n-2);
+    return  n === 1 || n === 2 ? 1 : add(n-1) + add(n-2);
+    }
+</code></pre>
+
+<h4>b.递归</h4>
+<p>自已调用自己</p>
+<p>在函数体内部调用自身函数</p>
+<p>效率看情况</p>
+<h4>c.阶乘</h4>
+<pre><code>    100! = 100 * (99 * 98 * ... * 1)
+    100! == 100 * 99!
+    99! == 99 * 98!
+    function cheng(n){
+    // if(n === 1)
+    //  return 1;
+    // return n * cheng(n-1);
+    return n === 1 ? 1 : n * cheng(n-1);
+    }
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

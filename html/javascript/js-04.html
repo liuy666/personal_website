@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>js-04.函数</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Consolas, Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+p {
+	text-indent : 2em; 
+}
+li,ol {
+	margin-left : 2em;
+}
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 14px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h3>补充完如下代码：</h3>
+<p>输入一个随机位数的数字(10位以内)，逆序打印输出各位数是多少?</p>
+<pre><code>    var num = 8273842;
+    var val;
+    while ( num !== 0 ) {
+        val = num % 10;
+        num = Math.floor(num / 10);
+        console.log(val);
+    }
+
+    8273842 % 10    2
+    827384  % 10    4
+    82738   % 10    8
+    8273    % 10    3
+    827     % 10    7
+    82      % 10    2
+    8       % 10    8
+    0
+</code></pre>
+
+<h3>思维导图工具：XMind	FreeMind	MindManager	...</h3>
+<h3>开发流程：</h3>
+<p>需求分析 --&gt; 概要设计 --&gt; 详细设计 --&gt; 编码 --&gt; 测试 --&gt; 部署 --&gt; 维护</p>
+<h3>断点调试(通常用于逻辑错误时使用) -- debug：</h3>
+<ul>
+<li>确定大概出错的位置，设置断点</li>
+<li>启动调试</li>
+<li>单步执行(F10)，观察变量变化，与预期变化比较</li>
+<li>找出具体的出错问题，停止调试，修改代码</li>
+</ul>
+<h3>事件驱动模型：</h3>
+<ul>
+<li>事件：动作行为</li>
+<li>事件类型：click、dblclick、mousedown、mouseup、mousemove、keyup、keydown......</li>
+<li>事件源：</li>
+<li>事件监听器：</li>
+<li>事件处理程序（事件响应程序）：函数</li>
+<li>事件句柄(后面详解)</li>
+</ul>
+<h3>函数：函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。</h3>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Functions">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Functions</a></p>
+</blockquote>
+<h3>本质：代码块</h3>
+<h3>函数定义：</h3>
+<p>a. 函数声明：</p>
+<pre><code>    function 函数名(可选参数列表) {
+        // 代码块
+    }
+</code></pre>
+
+<p>b. 函数表达式：</p>
+<pre><code>    var 变量名 = function (可选参数列表) {
+        // 代码块
+    }
+    (var 变量名 = 匿名函数;)
+</code></pre>
+
+<p>c. (了解) new 构造函数：</p>
+<pre><code>    var 变量名 = new Function(&quot;可选参数列表&quot;, &quot;函数主体&quot;);
+</code></pre>
+
+<h3>函数调用：</h3>
+<p>a. 直接调用</p>
+<p>　　　函数名(可选参数列表);</p>
+<p>b. 事件驱动</p>
+<p>　　　xxx.onclick = 函数名;</p>
+<p>函数调用时会先转向函数体执行代码块，当函数体执行完毕后回到调用处继续向后执行。</p>
+<h3>参数：</h3>
+<p>a. 形式参数（形参） -- 函数定义时的参数列表</p>
+<p>b. 实际参数（实参） -- 函数调用时的参数列表</p>
+<h3>返回值：</h3>
+<p>将函数处理结果返回。返回到函数调用处，以便函数调用结束后能够继续使用到在函数体中处理的结果。</p>
+<p>return 表达式;</p>
+<h3>函数练习</h3>
+<ol>
+<li>定义函数，判断某个年份是否为闰年</li>
+<li>定义函数，求某年某月有多少天</li>
+<li>定义函数，求某年某月1号是当年第多少天</li>
+<li>定义函数，求某年某月1号是距1900-1-1第多少天</li>
+<li>定义函数，求某年某月1号是星期几</li>
+<li>定义函数，打印某年某月日历</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
